@@ -61,8 +61,7 @@ public class OVchipkaart_Product implements Serializable {
 
     @Override
     public String toString() {
-        return ovChipkaart + "\n" + product + "\n" +
-                "status= '" + status + '\'' +
+        return "status= '" + status + '\'' +
                 ", last_update = " + last_update;
     }
 }
