@@ -11,5 +11,4 @@
         <mapping class="main.Reiziger"/>
         <mapping class="main.Product"/>
         <mapping class="main.OVChipkaart"/>
-        <mapping class="main.OVchipkaart_Product"/>
     </session-factory></hibernate-configuration>

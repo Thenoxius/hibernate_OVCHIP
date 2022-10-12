@@ -6,7 +6,6 @@
     <persistence-unit name="default">
         <class>main.Adres</class>
         <class>main.Reiziger</class>
-        <class>main.OVchipkaart_Product</class>
         <class>main.OVChipkaart</class>
         <class>main.Product</class>
         <properties>

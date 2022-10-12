@@ -17,30 +17,29 @@ public class Product implements Serializable {
     private String beschrijving;
     @Column(name = "prijs")
     private long prijs;
-    @OneToMany(
-            mappedBy = "product",
-            cascade= CascadeType.ALL,
-            orphanRemoval = true
+
+    @ManyToMany(
+            mappedBy = "mijnProducten"
     )
-    private List<OVchipkaart_Product> ovKaartenMetProduct = new ArrayList<>();
+    private List<OVChipkaart> ovKaartenMetProduct = new ArrayList<>();
 
     public Product() {
 
     }
 
-    public List<OVchipkaart_Product> getChipkaarten(){
+    public List<OVChipkaart> getChipkaarten(){
         return ovKaartenMetProduct;
     }
-    public void addOvChipkaart(OVchipkaart_Product oVchipkaart_product){
+    public void addOvChipkaart(OVChipkaart oVchipkaart_product){
         if (!ovKaartenMetProduct.contains(oVchipkaart_product)){
             ovKaartenMetProduct.add(oVchipkaart_product);
-            oVchipkaart_product.setProduct(this);
+            oVchipkaart_product.addToProducten(this);
         }
     }
-    public void removeOvChipkaart(OVchipkaart_Product oVchipkaart_product){
+    public void removeOvChipkaart(OVChipkaart oVchipkaart_product){
         if (ovKaartenMetProduct.contains(oVchipkaart_product)){
             ovKaartenMetProduct.remove(oVchipkaart_product);
-            oVchipkaart_product.setProduct(null);
+            oVchipkaart_product.removeProducten(this);
         }
     }
 

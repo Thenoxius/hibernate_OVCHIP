@@ -22,27 +22,28 @@ public class OVChipkaart implements Serializable {
             fetch = FetchType.LAZY
     )@JoinColumn(name = "reiziger_id")
     private Reiziger reiziger;
-    @OneToMany(
-            mappedBy = "ovChipkaart",
-            cascade= CascadeType.ALL,
-            orphanRemoval = true
+    @ManyToMany(cascade= CascadeType.ALL)
+    @JoinTable(
+            name = "OVchipkaart_Product",
+            joinColumns = @JoinColumn(name = "kaart_nummer"),
+            inverseJoinColumns = @JoinColumn(name = "product_nummer")
     )
-    private List <OVchipkaart_Product> mijnOv_Producten = new ArrayList<>();
+    private List <Product> mijnProducten = new ArrayList<>();
 
     public OVChipkaart() {
 
     }
 
-    public void addToProducten(OVchipkaart_Product oVchipkaart_product){
-        if (!mijnOv_Producten.contains(oVchipkaart_product)){
-            mijnOv_Producten.add(oVchipkaart_product);
-            oVchipkaart_product.setOvChipkaart(this);
+    public void addToProducten(Product product){
+        if (!mijnProducten.contains(product)){
+            mijnProducten.add(product);
+            product.addOvChipkaart(this);
         }
     }
-    public void removeProducten(OVchipkaart_Product oVchipkaart_product){
-        if (mijnOv_Producten.contains(oVchipkaart_product)){
-            mijnOv_Producten.remove(oVchipkaart_product);
-            oVchipkaart_product.setOvChipkaart(null);
+    public void removeProducten(Product product){
+        if (mijnProducten.contains(product)){
+            mijnProducten.remove(product);
+            product.removeOvChipkaart(null);
         }
     }
 
