@@ -1,5 +1,6 @@
 package main;
 
+import DAO.ReizigerDaoHibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -42,12 +43,17 @@ public class Main {
     }
 
     public static void main(String[] args) throws SQLException {
-        testFetchAll();
+        testFunction();
+        //testFetchAll();
     }
 
     /**
      * P6. Haal alle (geannoteerde) entiteiten uit de database.
      */
+    private static void testFunction() throws SQLException {
+        ReizigerDaoHibernate rdao = new ReizigerDaoHibernate(factory);
+        System.out.println(rdao.findAll());
+    }
     private static void testFetchAll() {
         Session session = getSession();
         try {

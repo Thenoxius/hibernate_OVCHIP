@@ -74,7 +74,12 @@ public class Reiziger implements Serializable {
         id = nieuwId;
     }
     public String getNaam(){
-        return voorletters + " " + tussenvoegsel + " " + achternaam;
+
+        if (tussenvoegsel == null){
+            return voorletters + " " + " " + achternaam;
+        } else {
+            return voorletters + " " +tussenvoegsel+ " " + achternaam;
+        }
     }
     public String getVoorletters() {
         return voorletters;
