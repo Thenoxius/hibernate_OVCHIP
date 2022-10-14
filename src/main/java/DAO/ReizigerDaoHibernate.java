@@ -15,6 +15,9 @@ public class ReizigerDaoHibernate implements ReizigerDAO{
     public ReizigerDaoHibernate(SessionFactory sessionFactory){
         this.session = sessionFactory.openSession();
     }
+    private AdresDAO adao;
+    private OVChipkaartDAO ovdao;
+    private ProductDAO pdao;
     public static Session session;
     public boolean save(Reiziger r){
         Transaction transaction = session.getTransaction();
@@ -78,31 +81,36 @@ public class ReizigerDaoHibernate implements ReizigerDAO{
 
     @Override
     public void setAdao(AdresDAO adao) {
-
+        this.adao = adao;
     }
 
     @Override
     public void setOvdao(OVChipkaartDAO ovdao) {
-
+        this.ovdao=ovdao;
     }
 
     @Override
     public void setPdao(ProductDAO pdao) {
-
+        this.pdao=pdao;
     }
 
     @Override
     public ProductDAO getPdao() {
-        return null;
+        return pdao;
     }
 
     @Override
     public OVChipkaartDAO getOvdao() {
-        return null;
+        return ovdao;
+    }
+    @Override
+    public AdresDAO getAdao(){
+        return adao;
     }
 
     @Override
     public List<OVChipkaart> findReizigerKaarten(Reiziger reiziger) {
-        return null;
+        Query query = session.createQuery("from Ov_chipkaart WHERE reiziger = :reizigerid").setParameter("reizigerid", reiziger);
+        return query.list();
     }
 }

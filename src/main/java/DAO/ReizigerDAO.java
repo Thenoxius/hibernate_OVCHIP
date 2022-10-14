@@ -22,5 +22,7 @@ public interface ReizigerDAO{
     public ProductDAO getPdao();
     public OVChipkaartDAO getOvdao();
 
+    AdresDAO getAdao();
+
     public List<OVChipkaart>  findReizigerKaarten(Reiziger reiziger);
 }

@@ -11,7 +11,7 @@ public interface OVChipkaartDAO {
     public boolean update(OVChipkaart chipkaart);
     public boolean delete(OVChipkaart chipkaart);
     public List<OVChipkaart> findByReiziger(Reiziger reiziger);
-    public OVChipkaart findByKaartNummer(OVChipkaart ovChipkaart);
+    public OVChipkaart findByKaartNummer(int kaartnummer);
     public List<OVChipkaart> findAll() throws SQLException;
 
     void setRdao(ReizigerDAO reizigerDAO);

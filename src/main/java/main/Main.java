@@ -1,5 +1,8 @@
 package main;
 
+import DAO.AdresDAOHibernate;
+import DAO.OVChipkaartDAOHibernate;
+import DAO.ProductDAOHibernate;
 import DAO.ReizigerDaoHibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -52,7 +55,14 @@ public class Main {
      */
     private static void testFunction() throws SQLException {
         ReizigerDaoHibernate rdao = new ReizigerDaoHibernate(factory);
-        System.out.println(rdao.findAll());
+        OVChipkaartDAOHibernate ovdao = new OVChipkaartDAOHibernate(factory);
+        Reiziger reiziger = rdao.findById(2);
+        ProductDAOHibernate pdao = new ProductDAOHibernate(factory);
+        AdresDAOHibernate adao = new AdresDAOHibernate(factory);
+        OVChipkaart chip = ovdao.findByKaartNummer(35283);
+        System.out.println(adao.findByReiziger(reiziger));
+        System.out.println(ovdao.findByReiziger(reiziger));
+        System.out.println(pdao.findByOVChipkaart(chip));
     }
     private static void testFetchAll() {
         Session session = getSession();
