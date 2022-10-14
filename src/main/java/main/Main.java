@@ -59,10 +59,17 @@ public class Main {
         Reiziger reiziger = rdao.findById(2);
         ProductDAOHibernate pdao = new ProductDAOHibernate(factory);
         AdresDAOHibernate adao = new AdresDAOHibernate(factory);
+        String gbdatum2 = "1991-04-22";
+        Reiziger test = new Reiziger(26, "R", "van", "Rijnveld", java.sql.Date.valueOf(gbdatum2));
+        Adres adrestest = new Adres(17, "2801NL", "10B", "Keizerstraat", "Gouda", test);
+        test.setAdres(adrestest);
+        rdao.save(test);
+        System.out.println(rdao.findById(26));
+        rdao.delete(test);
         OVChipkaart chip = ovdao.findByKaartNummer(35283);
         System.out.println(adao.findByReiziger(reiziger));
         System.out.println(ovdao.findByReiziger(reiziger));
-        System.out.println(pdao.findByOVChipkaart(chip));
+        System.out.println(pdao.findAll());
     }
     private static void testFetchAll() {
         Session session = getSession();

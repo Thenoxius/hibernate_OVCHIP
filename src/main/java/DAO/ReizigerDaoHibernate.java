@@ -20,11 +20,11 @@ public class ReizigerDaoHibernate implements ReizigerDAO{
     private ProductDAO pdao;
     public static Session session;
     public boolean save(Reiziger r){
-        Transaction transaction = session.getTransaction();
+        Transaction transaction = session.beginTransaction();
         try{
-            transaction.begin();
-            this.session.save(r);
+            session.save(r);
             transaction.commit();
+            session.flush();
             return true;
         } catch (RuntimeException e){
             transaction.rollback();
@@ -38,8 +38,9 @@ public class ReizigerDaoHibernate implements ReizigerDAO{
         Transaction transaction = session.getTransaction();
         try {
             transaction.begin();
-            this.session.update(reiziger);
+            session.update(reiziger);
             transaction.commit();
+            session.flush();
             return true;
         } catch (RuntimeException e){
             e.printStackTrace();
@@ -52,8 +53,9 @@ public class ReizigerDaoHibernate implements ReizigerDAO{
         Transaction transaction = session.getTransaction();
         try{
             transaction.begin();
-            this.session.delete(reiziger);
+            session.delete(reiziger);
             transaction.commit();
+            session.flush();
             return true;
         } catch(RuntimeException e){
             e.printStackTrace();

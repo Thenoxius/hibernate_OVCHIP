@@ -26,6 +26,7 @@ public class OVChipkaartDAOHibernate implements OVChipkaartDAO{
             transaction.begin();
             this.session.save(chipkaart);
             transaction.commit();
+            session.flush();
             return true;
         } catch (RuntimeException e){
             transaction.rollback();
@@ -39,8 +40,9 @@ public class OVChipkaartDAOHibernate implements OVChipkaartDAO{
         Transaction transaction = session.getTransaction();
         try {
             transaction.begin();
-            this.session.update(chipkaart);
+            session.update(chipkaart);
             transaction.commit();
+            session.flush();
             return true;
         } catch (RuntimeException e){
             e.printStackTrace();
@@ -53,8 +55,9 @@ public class OVChipkaartDAOHibernate implements OVChipkaartDAO{
         Transaction transaction = session.getTransaction();
         try{
             transaction.begin();
-            this.session.delete(chipkaart);
+            session.delete(chipkaart);
             transaction.commit();
+            session.flush();
             return true;
         } catch(RuntimeException e){
             e.printStackTrace();

@@ -24,8 +24,9 @@ public class AdresDAOHibernate implements AdresDAO{
         Transaction transaction = session.getTransaction();
         try{
             transaction.begin();
-            this.session.save(adres);
+            session.save(adres);
             transaction.commit();
+            session.flush();
             return true;
         } catch (RuntimeException e){
             transaction.rollback();
@@ -39,8 +40,9 @@ public class AdresDAOHibernate implements AdresDAO{
         Transaction transaction = session.getTransaction();
         try {
             transaction.begin();
-            this.session.update(adres);
+            session.update(adres);
             transaction.commit();
+            session.flush();
             return true;
         } catch (RuntimeException e){
             e.printStackTrace();
@@ -53,8 +55,9 @@ public class AdresDAOHibernate implements AdresDAO{
         Transaction transaction = session.getTransaction();
         try{
             transaction.begin();
-            this.session.delete(adres);
+            session.delete(adres);
             transaction.commit();
+            session.flush();
             return true;
         } catch(RuntimeException e){
             e.printStackTrace();

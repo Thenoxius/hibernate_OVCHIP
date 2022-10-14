@@ -23,8 +23,9 @@ public class ProductDAOHibernate implements ProductDAO{
         Transaction transaction = session.getTransaction();
         try{
             transaction.begin();
-            this.session.save(product);
+            session.save(product);
             transaction.commit();
+            session.flush();
             return true;
         } catch (RuntimeException e){
             transaction.rollback();
@@ -38,8 +39,9 @@ public class ProductDAOHibernate implements ProductDAO{
         Transaction transaction = session.getTransaction();
         try {
             transaction.begin();
-            this.session.update(product);
+            session.update(product);
             transaction.commit();
+            session.flush();
             return true;
         } catch (RuntimeException e){
             e.printStackTrace();
@@ -52,8 +54,9 @@ public class ProductDAOHibernate implements ProductDAO{
         Transaction transaction = session.getTransaction();
         try{
             transaction.begin();
-            this.session.delete(product);
+            session.delete(product);
             transaction.commit();
+            session.flush();
             return true;
         } catch(RuntimeException e){
             e.printStackTrace();
